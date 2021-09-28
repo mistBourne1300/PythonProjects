@@ -80,7 +80,11 @@ if __name__ == "__main__":
 	
 	end_time = time()
 	print(built_string, hang_word)
-	print(f'it took you {tries} guesses and {round(end_time - start_time)} seconds to finish the game')
+	total_time = round(end_time - start_time)
+	if(built_string == hang_word):
+		print(f'it took you {tries} guesses and {total_time} seconds to finish the game')
+	else:
+		print(f'it took you {tries} guesses and {total_time} seconds to give up')
 	
 	
 
