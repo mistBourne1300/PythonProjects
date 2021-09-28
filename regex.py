@@ -15,6 +15,6 @@ print(bool(pattern.search(TEXT_TO_SEARCH)))
 
 matches = pattern.finditer(TEXT_TO_SEARCH)
 for match in matches:
-    print(match)
+    print(match.start())
 
 
