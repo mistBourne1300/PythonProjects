@@ -5,6 +5,7 @@ from time import time
 
 
 if __name__ == "__main__":
+	os.chdir("/Users/chase/Desktop/Python")
 	built_string = ""
 	english_file = open("all_english_words.txt")
 	words = [str.lower(line.strip()) for line in english_file]
