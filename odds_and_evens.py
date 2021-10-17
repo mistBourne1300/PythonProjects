@@ -8,7 +8,7 @@
 		games that allow 0 fingers
 		games that do not
 	To simulate the two variations, either include
-	or exclude o in the poss_hand list.
+	or exclude 0 in the poss_hand list.
 '''
 
 import random as rand

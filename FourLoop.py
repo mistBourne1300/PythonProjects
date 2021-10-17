@@ -70,7 +70,11 @@ def get_num_letters(str):
 
 userNum = int(input(f"Enter an integer: "))
 userNum2 = userNum
-get_string(userNum, True)
+userNumStr = get_string(userNum, True)
+
+print(f'\n\n{userNum}: {userNumStr}\n\n')
+
+throw_away = input("press enter to continue")
 
 
 while userNum != 4:
