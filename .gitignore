@@ -2,3 +2,4 @@
 all_english_words.txt
 TextingWorkspace.code-workspace
 pascal_mod*
+__pycache__/
