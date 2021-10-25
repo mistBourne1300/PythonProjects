@@ -1,4 +1,4 @@
-NUMBERS_TO_WORDS = {
+mNUMBERS_TO_WORDS = {
     1000000000: 'billion',
     1000000: 'million',
     1000: 'thousand',
