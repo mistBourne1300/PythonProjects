@@ -135,11 +135,27 @@ def related_samples_t_test(before, after):
     t = diff_mean / (diff_std_dev / math.sqrt(len(diff)))
     return t
 
+def calc_grand_mean(observations):
+    ''' accepts a list of lists and returns the grand mean for the entire list
+        Parameters:
+            observations [list]: a list of lists
+        
+        Returns:
+            grand_mean [float]: the mean of all the observations
+    '''
+    sum_total = 0
+    num_observations = 0
+    for liszt in observations:
+        for datum in liszt:
+            sum_total += datum
+            num_observations += 1
+    return sum_total / num_observations
+    
 def between_SS(observations):
     row_means = []
     for row in observations:
         row_means.append(calc_mean(row))
-    grand_mean = calc_mean(row_means)
+    grand_mean = calc_grand_mean(observations)
     between_sum_of_squares = 0
     for i in range(len(observations)):
         num_scores_in_row = len(observations[i])
