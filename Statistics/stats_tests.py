@@ -179,7 +179,7 @@ def total_SS(observations):
     row_means = []
     for row in observations:
         row_means.append(calc_mean(row))
-    grand_mean = calc_mean(row_means)
+    grand_mean = calc_grand_mean(observations)
     degrees_of_freedom = 0
     for row in observations:
         for num in row:
