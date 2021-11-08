@@ -26,9 +26,6 @@ def calc_mode(numbers):
     
     return modes[mode_freq.index(max(mode_freq))]
 
-
-#TODO: Measures of variability
-
 def calc_range(numbers):
     numbers.sort()
     return numbers[-1] - numbers[0]
@@ -44,10 +41,8 @@ def calc_variance(numbers):
 def calc_standard_deviation(numbers):
     return math.sqrt(calc_variance(numbers))
 
-#TODO: Correlation and Regression
-
 def calc_covariance(x_nums, y_nums):
-    if len(x_nums) is not len(y_nums):
+    if len(x_nums) != len(y_nums):
         raise ValueError("Covariance Error: X and Y of diff length")
     x_avg = calc_mean(x_nums)
     y_avg = calc_mean(y_nums)
@@ -92,9 +87,6 @@ def calc_total_variation(x_nums, y_nums):
 
 def calc_r_squared(x_nums, y_nums):
     return calc_explained_variation(x_nums, y_nums) / calc_total_variation(x_nums, y_nums)
-
-
-#TODO: Hypothesis testing
 
 def calc_one_mean_t_test(numbers, meu, sig = None): #if sigma is known, use that to calculate the t-test
     if not sig:
@@ -143,9 +135,6 @@ def related_samples_t_test(before, after):
     t = diff_mean / (diff_std_dev / math.sqrt(len(diff)))
     return t
 
-
-#TODO: ANOVA
-
 def between_SS(observations):
     row_means = []
     for row in observations:
@@ -193,9 +182,6 @@ def One_Way_ANOVA(observations): #accepts a list of lists, and calculates an ANO
     MS_within = SS_within / df_within
     F_ratio = MS_between / MS_within
     return F_ratio
-
-
-#TODO: Chi-squared
 
 def chi_squared(frequencies): #accepts a list of frequency lists (the rows of a chi-squared table)
     if (len(frequencies) == 1): #there is only one row, the expected value is the mean of the list.
