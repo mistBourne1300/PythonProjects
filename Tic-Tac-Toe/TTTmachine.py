@@ -10,7 +10,7 @@ class TicEsMachina:
 			layer3 (9x3 ndarray): the third layer weights
 	'''
 
-	def __init__(self, player = 1, foldername = ""):
+	def __init__(self, player, foldername = ""):
 		self.player = player
 		if(foldername):
 			self.layer1 = np.load(f'{foldername}/layer1.npy')
@@ -38,7 +38,7 @@ class TicEsMachina:
 		if type(other) != type(self):
 			raise ValueError(f"cannot broadcast between {type(other)} and {type(self)}")
 		
-		newmachine = TicEsMachina()
+		newmachine = TicEsMachina(1)
 		layer1_stack = np.dstack((self.layer1, other.layer1))
 		layer2_stack = np.dstack((self.layer2, other.layer2))
 		layer3_stack = np.dstack((self.layer3, other.layer3))

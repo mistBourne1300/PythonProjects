@@ -36,7 +36,8 @@ from matplotlib import pyplot as plt
 import os
 from scipy.stats import linregress
 
-
+def sigmoid(x):
+	return 1/(1+np.exp(-x))
 
 # image = imread("/Users/chase/Downloads/IMG_0124.JPG")
 # scaled = image / 255
@@ -65,19 +66,30 @@ from scipy.stats import linregress
 # print(sum)
 os.chdir("/Users/chase/Desktop/Python")
 
-A = np.load("anscombe.npy")
+# A = np.load("anscombe.npy")
 
-print(A[:,0], A[:,1])
+# print(A[:,0], A[:,1])
 
-for i in range(2,len(A[:,0])):
-	exxes = A[:i,0]
-	whys = A[:i,1]
-	regress = linregress(exxes, whys)
-	domain = np.linspace(0, 15)
-	rng = regress[0] * domain + regress[1]
-	plt.plot(domain, rng)
-	plt.scatter(exxes, whys)
-	plt.title(f"anscombe with {i} data points\n r = {regress[2]}")
-	plt.xlim(0,15)
-	plt.ylim(0,15)
-	plt.show()
+# for i in range(2,len(A[:,0])):
+# 	exxes = A[:i,0]
+# 	whys = A[:i,1]
+# 	regress = linregress(exxes, whys)
+# 	domain = np.linspace(0, 15)
+# 	rng = regress[0] * domain + regress[1]
+# 	plt.plot(domain, rng)
+# 	plt.scatter(exxes, whys)
+# 	plt.title(f"anscombe with {i} data points\n r = {regress[2]}")
+# 	plt.xlim(0,15)
+# 	plt.ylim(0,15)
+# 	plt.show()
+
+print(np.sqrt(800))
+
+
+for i in range(9):
+	print(f'{i//3,i%3}')
+
+domain = np.linspace(-10,10)
+rng = sigmoid(domain)
+plt.plot(domain,rng)
+plt.show()

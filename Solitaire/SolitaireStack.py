@@ -25,12 +25,14 @@ class SolitaireStack:
     def removeTopCard(self):
         if self.faceUpStack:
             oldTopCard = self.faceUpStack.pop()
+        else:
+            return None
         if not self.faceUpStack:
             self.revealTopFaceDownCard()
         return oldTopCard
     
     def removeFaceUpStack(self):
-        oldStack = self.faceUpStack
+        oldStack = self.faceUpStack.copy()
         self.faceUpStack.clear()
         self.revealTopFaceDownCard()
         return oldStack
@@ -48,10 +50,12 @@ class SolitaireStack:
     def highFaceUpCard(self):
         if self.faceUpStack:
             return self.faceUpStack[0]
+        else: return None
     
     def lowFaceUpCard(self):
         if self.faceUpStack:
             return self.faceUpStack[-1]
+        else: return None
     
     def getFaceDownStackSize(self):
         return len(self.faceDownStack)

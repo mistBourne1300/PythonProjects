@@ -30,42 +30,42 @@ class Board:
 		'''
 		# check all rows and columns for an X win
 		if np.all(self.board[:,0] == 1):
-			print(1)
+			# print(1)
 			return 1
 		if np.all(self.board[:,1] == 1):
-			print(2)
+			# print(2)
 			return 1
 		if np.all(self.board[:,2] == 1):
-			print(3)
+			# print(3)
 			return 1
 		if np.all(self.board[0,:] == 1):
-			print(4)
+			# print(4)
 			return 1
 		if np.all(self.board[1,:] == 1):
-			print(5)
+			# print(5)
 			return 1
 		if np.all(self.board[2,:] == 1):
-			print(6)
+			# print(6)
 			return 1
 		
 		# check all rows and columns for an O win
 		if np.all(self.board[:,0] == -1):
-			print(7)
+			# print(7)
 			return -1
 		if np.all(self.board[:,1] == -1):
-			print(8)
+			# print(8)
 			return -1
 		if np.all(self.board[:,2] == -1):
-			print(9)
+			# print(9)
 			return -1
 		if np.all(self.board[0,:] == -1):
-			print(10)
+			# print(10)
 			return -1
 		if np.all(self.board[1,:] == -1):
-			print(11)
+			# print(11)
 			return -1
 		if np.all(self.board[2,:] == -1):
-			print(12)
+			# print(12)
 			return -1
 
 		# grab the two diagonals
@@ -74,18 +74,18 @@ class Board:
 		
 		# check the two diagonals for an X win
 		if np.all(diag1 == 1):
-			print(13, diag1)
+			# print(13, diag1)
 			return 1
 		if np.all(diag2 == 1):
-			print(14, diag2)
+			# print(14, diag2)
 			return 1
 		
 		# check the diagonals for an O win
 		if np.all(diag1 == -1):
-			print(15, diag1)
+			# print(15, diag1)
 			return -1
 		if np.all(diag2 == -1):
-			print(16, diag2)
+			# print(16, diag2)
 			return -1
 		
 		return 0
@@ -119,5 +119,20 @@ class Board:
 		return True
 
 	def __str__(self):
-		return str(self.board)
-
+		string = ""
+		counter = 0
+		for i in np.ravel(self.board):
+			if i == 0:
+				if(counter<6):
+					string += "_"
+				else:
+					string += " "
+			elif i == -1: string += "O"
+			elif i == 1: string += "X"
+			counter += 1
+		
+		spacing = "||\n||\n||\n"
+		lace = ""
+		for i in range(9):
+			lace += string[i] + spacing[i]
+		return lace
