@@ -35,6 +35,7 @@ from imageio import imwrite
 from matplotlib import pyplot as plt
 import os
 from scipy.stats import linregress
+from datetime import date
 
 def sigmoid(x):
 	return 1/(1+np.exp(-x))
@@ -93,3 +94,11 @@ domain = np.linspace(-10,10)
 rng = sigmoid(domain)
 plt.plot(domain,rng)
 plt.show()
+
+exxes = [x for x in range(10)]
+whys = [y for y in range(9)]
+whys.append(None)
+plt.plot(exxes, whys)
+plt.show()
+today = date.today()
+print(today)

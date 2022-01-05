@@ -48,13 +48,13 @@ class SolitaireGame:
         FLIP_NEXT_HELPERS = 4
 
         if(choice == TERMINATE):
-            print("Game Terminated")
-            print(self)
+            # print("Game Terminated")
+            # print(self)
             return False
         
         elif(choice == MOVE_ENTIRE_STACK):
             if not (self.SolitaireStacks[fromStack].faceUpStack):
-                print("Cannot move from empty stack")
+                # print("Cannot move from empty stack")
                 # print(self)
                 return False
             highFromCard = self.SolitaireStacks[fromStack].highFaceUpCard()
@@ -65,7 +65,7 @@ class SolitaireGame:
                 return True
             
             if not self.SolitaireStacks[toStack].faceUpStack:
-                print("Cannot move to an empty stack without a king")
+                # print("Cannot move to an empty stack without a king")
                 # print(self)
                 return False
             
@@ -75,14 +75,14 @@ class SolitaireGame:
                 # print(self)
                 return True
             else:
-                print("That is not a valid move")
+                # print("That is not a valid move")
                 # print(self)
                 return False
             
         
         elif(choice == MOVE_ONE_CARD):
             if not self.SolitaireStacks[fromStack].faceUpStack:
-                print("cannot move from empty stack")
+                # print("cannot move from empty stack")
                 # print(self)
                 return False
             
@@ -93,7 +93,7 @@ class SolitaireGame:
                     # print(self)
                     return True
                 else:
-                    print("Cannot move a king to a nonempty stack")
+                    # print("Cannot move a king to a nonempty stack")
                     # print(self)
                     return False
             
@@ -103,12 +103,12 @@ class SolitaireGame:
                 # print(self)
                 return True
             else: 
-                print("Cannot push ", str(movingCard), " to ", str(lowToCard))
+                # print("Cannot push ", str(movingCard), " to ", str(lowToCard))
                 return False
         
         elif(choice == MOVE_HELPER_CARD):
             if not self.helpStack.faceUpStack:
-                print("Cannot move from an empty stack")
+                # print("Cannot move from an empty stack")
                 # print(self) 
                 return False
             movingCard = self.helpStack.lowFaceUpCard()
@@ -125,16 +125,14 @@ class SolitaireGame:
                 
                 for aceStack in self.aceStacks:
                     topAceCard = aceStack.lowFaceUpCard()
-                    print(f'moving {movingCard} to {topAceCard}')
-                    print(f'move rank: {movingCard.rank}; suit: {movingCard.suit}')
-                    print(f'ace Rank: {topAceCard.rank}; suit: {topAceCard.suit}')
+                    # print(f'moving {movingCard} to {topAceCard}')
+                    # print(f'move rank: {movingCard.rank}; suit: {movingCard.suit}')
+                    # print(f'ace Rank: {topAceCard.rank}; suit: {topAceCard.suit}')
                     if (topAceCard.getSuit() == movingCard.getSuit()) and (topAceCard.getRank() == movingCard.getRank() - 1):
                         aceStack.addFaceUpCard(self.helpStack.removeTopCard())
                         # print(self)
                         return True
-                    else:
-                        print("Cannot move this card to the ace stacks")
-                        # print(self)
+                # print("Cannot move this card to the ace stacks")
                 return False
             #check to see if it's a king
             if movingCard.getRank() == 13:
@@ -142,7 +140,7 @@ class SolitaireGame:
                     self.SolitaireStacks[toStack].addFaceUpCard(self.helpStack.removeTopCard())
                     return True
                 else:
-                    print("Cannot move a king to a nonempty stack")
+                    # print("Cannot move a king to a nonempty stack")
                     return False
                 # print(self)
                 return
@@ -153,20 +151,20 @@ class SolitaireGame:
                 # print(self)
                 return True
             else:
-                print("Cannot push ", str(movingCard), " to ", str(lowToCard))
+                # print("Cannot push ", str(movingCard), " to ", str(lowToCard))
                 return False
         
 
         elif(choice == MOVE_TO_ACE):
             if not  self.SolitaireStacks[fromStack].faceUpStack:
-                print("Cannot move from empty stack")
+                # print("Cannot move from empty stack")
                 # print(self)
                 return False
             
             movingCard = self.SolitaireStacks[fromStack].lowFaceUpCard()
-            print("moving ", str(movingCard), str(movingCard.rank))
+            # print("moving ", str(movingCard), str(movingCard.rank))
             if movingCard.getRank() == 1:
-                print("Moving Ace")
+                # print("Moving Ace")
                 newAceStack = AceStack()
                 newAceStack.addFaceUpCard(self.SolitaireStacks[fromStack].removeTopCard())
                 self.aceStacks.append(newAceStack)
@@ -181,7 +179,7 @@ class SolitaireGame:
                     # print(self)
                     return True
             
-            print("Could not find an ace stack to push ", str(movingCard), " to")
+            #print("Could not find an ace stack to push ", str(movingCard), " to")
             return False
         
         elif(choice == FLIP_NEXT_HELPERS):
@@ -201,30 +199,3 @@ class SolitaireGame:
             if stack.lowFaceUpCard().rank != 13:
                 win = False
         return win
-
-
-
-
-            
-
-            
-
-            
-
-            
-
-
-
-
-
-                
-
-
-
-            
-
-
-
-            
-
-

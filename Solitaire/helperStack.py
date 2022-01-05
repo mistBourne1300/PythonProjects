@@ -21,5 +21,3 @@ class helperStack(SolitaireStack):
             stack += " | "
         stack = stack[:-2]
         return stack
-
-    

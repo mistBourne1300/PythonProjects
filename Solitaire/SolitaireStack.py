@@ -62,6 +62,3 @@ class SolitaireStack:
     
     def getFaceUpstackSize(self):
         return len(self.faceUpStack)
-
-
-        
