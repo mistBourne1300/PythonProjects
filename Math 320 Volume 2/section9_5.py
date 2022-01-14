@@ -34,9 +34,11 @@ def interpol(f, n, x):
 
 if __name__ == "__main__":
 	domain = np.linspace(-1,1, 1000)
-	for k in 2**np.arange(1,7):
-		plt.plot(domain, interpol(f,k,domain))
+	for k in range(1,10):
+		plt.subplot(3,3,k)
+		plt.plot(domain, interpol(f,2**k,domain))
 		plt.plot(domain,f(domain))
-		plt.show()
+	plt.suptitle("Chebyshex interpolation of np.where(x<0, 1+x, x)")
+	plt.show()
 
 
