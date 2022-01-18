@@ -4,6 +4,8 @@ import matplotlib.pyplot as plt
 
 f = lambda x: np.where(x<0, 1+x, x)
 
+# f = lambda x: np.abs(x)
+
 runge = lambda x: 1/(1+25*x**2)
 
 def cheby(f,n):

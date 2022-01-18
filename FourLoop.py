@@ -108,7 +108,7 @@ WORDS_TO_NUMBERS = {
 	"zero": 0
 }
 
-def string_to_num(string): # TODO: almost have it working. Just need to iron out the details. 
+def string_to_num(string): 
 	words = string.split()
 	def parse_list(lst):
 
