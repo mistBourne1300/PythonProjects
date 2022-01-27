@@ -12,7 +12,7 @@ def at_least_one_heads():
 
 if __name__ == "__main__":
     two_heads = []
-    for i in range(10000):
+    for i in range(50000):
         toss=at_least_one_heads()
         print(toss)
         two_heads.append(sum(toss)==2)
