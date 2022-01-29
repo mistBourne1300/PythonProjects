@@ -48,7 +48,6 @@ def prob16():
 		approx = forward_diff(1, f, point, h)
 		times.append(time() - start)
 		errors.append(np.linalg.norm(correctomundo - approx))
-		print(f'error: {errors[-1]}')
 
 
 	# plot h value v time
@@ -183,6 +182,61 @@ def prob18():
 	plt.tight_layout()
 	plt.show()
 
+def ReLu(x):
+    return anp.max([0, x])
+
+def F(x1, x2, w11, w12, w21, w22, b11, b12):
+    x = anp.array([x1, x2])
+    w1 = anp.array([w11, w12])
+    w2 = anp.array([w21, w22])
+    b1 = anp.array([b11, b12])
+
+    return anp.array(
+        [
+            ReLu( anp.dot(w1, x) + b1[0] ),
+            ReLu( anp.dot(w2, x) + b1[1] ),
+        ]
+    )
+    
+
+def N1(x1, x2, w01, w02, w11, w12, w21, w22, b0, b11, b12):
+    w0 = anp.array([w01, w02])
+    
+    activation = ReLu(
+        w0.T @ F(x1, x2, w11, w12, w21, w22, b11, b12) + b0
+    )
+    return activation
+
+
+def N2(x1, x2, w01, w02, w11, w12, w21, w22, w31, w32, w41, w42, b0, b11, b12, b21, b22):
+    w0 = anp.array([w01, w02])
+    y1, y2 = F(x1, x2, w31, w32, w41, w42, b11, b12)
+    
+    activation = ReLu(
+        w0.T @ F(y1, y2, w11, w12, w21, w22, b21, b22) + b0
+    )
+    
+    return activation
+def prob19():
+	for _ in range(10):
+		# Draw inputs, weights, biases at random from standard normal distribution.
+
+		N1_input_vector = anp.random.standard_normal(11)   # Need 11 inputs for component-wise N1
+		N2_input_vector = anp.random.standard_normal(17)   # Need 17 inputs for component-wise N2
+
+		N1_input_vector[N1_input_vector < 1e-5] = 0.5  # Autograd can't handle when weights/biases are close to 0.
+		N2_input_vector[N2_input_vector < 1e-5] = 0.5
+
+		# Compute partial derivative of N1, N2 with respect to w11 (position 4 in function arguments)
+		N_1_grad = grad(N1, 4)
+		N_2_grad = grad(N2, 4)
+
+		# Compare results and display partial for N2.
+		print(f"Exact Partial Derivative (N1): {N1_input_vector[2]*N1_input_vector[0]}") # Symbolic partial derivative is w01 * x1
+		print(f"Approximate Partial Derivative (N1): {N_1_grad(*N1_input_vector)}")
+		print(f"Approximate Partial Derivative (N2): {N_2_grad(*N2_input_vector)}")
+		print("--------")
+
 if __name__ == "__main__":
 	f = lambda x: np.array([((np.sin(x))**3 + np.cos(x))/np.exp(x)])
 
@@ -190,3 +244,4 @@ if __name__ == "__main__":
 	prob16()
 	prob17()
 	prob18()
+	prob19()
