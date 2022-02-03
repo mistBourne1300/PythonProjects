@@ -110,25 +110,26 @@ WORDS_TO_NUMBERS = {
 	"zero": 0
 }
 
-def string_to_num(string): 
+def string_to_num(string, v=False): 
 	words = string.split()
-	def parse_list(lst):
+	def parse_list(lst, whitespace = ''):
 
 		for WORD in WORDS_TO_NUMBERS:
 			if WORD not in lst: continue
-
+			if v:
+				print(f'{whitespace}{WORD}')
 			if len(lst) == 1: return WORDS_TO_NUMBERS[WORD]
 
 			index = len(lst) - lst[::-1].index(WORD) - 1
 
 			# if the index is the last in the list, there is nothing to add at the end, and we don't want to raise an exception
 			if index == len(lst) - 1:
-				return parse_list(lst[:index]) * WORDS_TO_NUMBERS[WORD]
+				return parse_list(lst[:index], whitespace+'\t*') * WORDS_TO_NUMBERS[WORD]
 			
 			if index == 0:
-				return WORDS_TO_NUMBERS[WORD] + parse_list(lst[index+1:])
+				return WORDS_TO_NUMBERS[WORD] + parse_list(lst[index+1:], whitespace+'\t+')
 			
-			return parse_list(lst[:index]) * WORDS_TO_NUMBERS[WORD] + parse_list(lst[index+1:])
+			return parse_list(lst[:index], whitespace+'\t*') * WORDS_TO_NUMBERS[WORD] + parse_list(lst[index+1:], whitespace+'\t+')
 			
 
 
@@ -138,7 +139,7 @@ def string_to_num(string):
 	return parse_list(words)
 		
 
-def get_string(num, p=False):
+def get_string(num, p=False, whitespace = ''):
 	#if num == 0:
 		#return 'zero'
 	userNumStr = ""
@@ -147,14 +148,14 @@ def get_string(num, p=False):
 			number_of_NUMBERS = num // NUMBER
 			
 			if p:
-				print(f'num: {num}')
-				print(f'NUMBER: {NUMBER}')
-				print(f'number_of_NUMBERS: {number_of_NUMBERS}')
+				print(f'{whitespace}num: {num}')
+				print(f'{whitespace}numNUMBER: {NUMBER}')
+				print(f'{whitespace}numnumber_of_NUMBERS: {number_of_NUMBERS}')
 			
 			
 			# if greater than 100, find how many there are
 			if NUMBER >= 100:
-				userNumStr += get_string(number_of_NUMBERS)
+				userNumStr += get_string(number_of_NUMBERS,p,whitespace+'\t')
 				userNumStr += NUMBERS_TO_WORDS[NUMBER] + ' '
 			# otherwise, just append the number
 			else:
@@ -164,7 +165,7 @@ def get_string(num, p=False):
 			num = num - (number_of_NUMBERS * NUMBER)
 			
 		if p:
-			print(f'passed {NUMBERS_TO_WORDS[NUMBER]}, userNumStr: {userNumStr}')
+			print(f'{whitespace}numpassed {NUMBERS_TO_WORDS[NUMBER]}, userNumStr: {userNumStr}')
 	return userNumStr
 
 def get_num_letters(str):
@@ -180,7 +181,7 @@ userNum2 = userNum
 userNumStr = get_string(userNum, True)
 
 print(f'\n\n{userNum}: {userNumStr}\n\ncalculating back:')
-calc_back = string_to_num(userNumStr)
+calc_back = string_to_num(userNumStr,True)
 
 print(calc_back)
 print(f'string_to_num worked: {calc_back == userNum}')
