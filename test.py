@@ -1,8 +1,11 @@
 import numpy as np
-a = -1
-b = 1
-c = 3
-domainx, domainy = np.meshgrid(np.linspace(a,b,c), np.linspace(a,b,c))
-f = lambda x,y: x**2 + y**2 + x + y + 1
+import re
+import epitran as ep
+# import panphon
 
-z = f(domainx, domainy)
+# dst = panphon.distance.Distance()
+
+tree = "ferguson"
+census = "fergesson"
+
+# print(f'normal distance: {dst.fast_levenstein_distance(tree, census)}')
