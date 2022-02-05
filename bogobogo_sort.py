@@ -16,14 +16,18 @@ def bogobogo(liszt:list, level = 0, v = False):
 			iter(int): 		the total number of iterations used to sort the list 
 							(including iterations used by lower recursion levels)
 	"""
-	if v:
-		[print(end = f" ") for i in range(level)]
-		print(liszt)
+	
 	# base case. list is of length one
 	if len(liszt) <= 1:
+		if v:
+			[print(end = f"\t") for i in range(level)]
+			print(liszt)
 		return liszt, 0
 	iter = 0
 	while True:
+		if v:
+			[print(end = f"\t") for i in range(level)]
+			print(liszt)
 		iter += 1
 		# get the first element for later
 		l0 = liszt[0]
@@ -37,6 +41,9 @@ def bogobogo(liszt:list, level = 0, v = False):
 		# if the oth element is less than the minimum of the rest of the list,
 		# the entire list is sorted. return
 		if liszt[0] < np.min(liszt[1:]):
+			if v:
+				[print(end = f"\t") for i in range(level)]
+				print("sorted")
 			return liszt, iter
 		
 		# otherwise, we randomize and try again
@@ -60,14 +67,13 @@ if __name__ == "__main__":
 		# print(lsd[1:])
 		start = time.time()
 		try:
-			lsd, iter = bogobogo(lsd, v = True)
+			lsd, iter = bogobogo(lsd)
 		except:
 			break
 		times.append(time.time() - start)
 		iterations.append(iter)
 		print(lsd, iter)
 		i += 1
-		time.sleep(i)
 
 	plt.subplot(211)
 	plt.plot(times)
