@@ -1,5 +1,8 @@
 import os
 
+from pyparsing import Word
+from sympy import numer
+
 # print(len('4217643999648948533686334868689238648684936926487387936483792387473874873879277487739827083744470283757473727734087449816356081604710870805773074037775080387883874737473738717537476913846993774830183757488293864783588876433600098765421123455699999999999999995280522225138166806691251291352861698530421623488512'))
 NUMBERS_TO_WORDS = {
 	10**303: 'centillion',
@@ -110,8 +113,7 @@ WORDS_TO_NUMBERS = {
 	"zero": 0
 }
 
-def string_to_num(string, v=False): 
-	words = string.split()
+def string_to_num(string:str, v=False): 
 	def parse_list(lst, whitespace = ''):
 
 		for WORD in WORDS_TO_NUMBERS:
@@ -131,12 +133,20 @@ def string_to_num(string, v=False):
 			
 			return parse_list(lst[:index], whitespace+'\t*') * WORDS_TO_NUMBERS[WORD] + parse_list(lst[index+1:], whitespace+'\t+')
 			
+	def get_numerical_words(words:list):
+		numerical = []
+		for word in words:
+			try:
+				WORDS_TO_NUMBERS[word]
+			except:
+				continue
+			numerical.append(word)
+		return numerical
 
 
 
-
-		
-	return parse_list(words)
+	
+	return parse_list(get_numerical_words(string.split()))
 		
 
 def get_string(num, p=False, whitespace = ''):
@@ -149,8 +159,8 @@ def get_string(num, p=False, whitespace = ''):
 			
 			if p:
 				print(f'{whitespace}num: {num}')
-				print(f'{whitespace}numNUMBER: {NUMBER}')
-				print(f'{whitespace}numnumber_of_NUMBERS: {number_of_NUMBERS}')
+				print(f'{whitespace}NUMBER: {NUMBER}')
+				print(f'{whitespace}number_of_NUMBERS: {number_of_NUMBERS}')
 			
 			
 			# if greater than 100, find how many there are
@@ -165,7 +175,7 @@ def get_string(num, p=False, whitespace = ''):
 			num = num - (number_of_NUMBERS * NUMBER)
 			
 		if p:
-			print(f'{whitespace}numpassed {NUMBERS_TO_WORDS[NUMBER]}, userNumStr: {userNumStr}')
+			print(f'{whitespace}passed {NUMBERS_TO_WORDS[NUMBER]}, userNumStr: {userNumStr}')
 	return userNumStr
 
 def get_num_letters(str):
@@ -174,43 +184,40 @@ def get_num_letters(str):
 		if l.isalpha(): num_letters += 1
 	return num_letters
 
+if __name__ == "__main__":
+		
+
+	userNum = int(input(f"Enter an integer: "))
+	userNum2 = userNum
+	userNumStr = get_string(userNum, True)
+
+	print(f'\n\n{userNum}: {userNumStr}\n\ncalculating back:')
+	calc_back = string_to_num(userNumStr,True)
+
+	print(calc_back)
+	print(f'string_to_num worked: {calc_back == userNum}')
 
 
-userNum = int(input(f"Enter an integer: "))
-userNum2 = userNum
-userNumStr = get_string(userNum, True)
+	# os.system(f'say {userNumStr}')
 
-print(f'\n\n{userNum}: {userNumStr}\n\ncalculating back:')
-calc_back = string_to_num(userNumStr,True)
-
-print(calc_back)
-print(f'string_to_num worked: {calc_back == userNum}')
-
-
-# os.system(f'say {userNumStr}')
-
-# for i in range(1,10):
-# 	os.system(f'say {get_string(i)}')
-
-
-
-
-
-# while userNum != 4:
-# 	userNumStr = get_string(userNum)
-# 	# print(f'{userNum}: {userNumStr}')
-# 	num_letters = get_num_letters(userNumStr)
-# 	print(f'{userNum} has {num_letters} letters')
-# 	userNum = num_letters
-# userNumStr = get_string(userNum)
-# # print(f'{userNum}: {userNumStr}')
-# num_letters = get_num_letters(userNumStr)
-# print(f'{userNum} has {num_letters} letters')
-# userNum = num_letters
+	# for i in range(1,10):
+	# 	os.system(f'say {get_string(i)}')
 
 
 
 
+
+	# while userNum != 4:
+	# 	userNumStr = get_string(userNum)
+	# 	# print(f'{userNum}: {userNumStr}')
+	# 	num_letters = get_num_letters(userNumStr)
+	# 	print(f'{userNum} has {num_letters} letters')
+	# 	userNum = num_letters
+	# userNumStr = get_string(userNum)
+	# # print(f'{userNum}: {userNumStr}')
+	# num_letters = get_num_letters(userNumStr)
+	# print(f'{userNum} has {num_letters} letters')
+	# userNum = num_letters
 
 
 
@@ -218,25 +225,29 @@ print(f'string_to_num worked: {calc_back == userNum}')
 
 
 
-# if userNum2 < 100000:
-# 	throw_away = input("press enter to continue")
-# 	for i in range(25):
-# 		print('*', end = "")
-# 	print(f'\nCalculating the iterations for each number up to {userNum2}...\n\n')
-# 	iterations_array = []
-# 	for i in range(1, userNum2+1):
-# 		num_to_calculate = i
-# 		counter = 1
-# 		while num_to_calculate != 4:
-# 			userNumStr = get_string(num_to_calculate)
-# 			num_letters = get_num_letters(userNumStr)
-# 			num_to_calculate = num_letters
-# 			counter += 1
-# 		iterations_array.append(counter)
-	
-# 	#for i in range(len(iterations_array)):
-# 	    #print(f'{i+1} took {iterations_array[i]} iterations to reach four.')
-# 	max_iter = max(iterations_array)
-# 	print(f'The number \'{iterations_array.index(max_iter) + 1}\' is longest anything took to reach four with {max_iter} iterations')
+
+
+
+
+	# if userNum2 < 100000:
+	# 	throw_away = input("press enter to continue")
+	# 	for i in range(25):
+	# 		print('*', end = "")
+	# 	print(f'\nCalculating the iterations for each number up to {userNum2}...\n\n')
+	# 	iterations_array = []
+	# 	for i in range(1, userNum2+1):
+	# 		num_to_calculate = i
+	# 		counter = 1
+	# 		while num_to_calculate != 4:
+	# 			userNumStr = get_string(num_to_calculate)
+	# 			num_letters = get_num_letters(userNumStr)
+	# 			num_to_calculate = num_letters
+	# 			counter += 1
+	# 		iterations_array.append(counter)
+		
+	# 	#for i in range(len(iterations_array)):
+	# 	    #print(f'{i+1} took {iterations_array[i]} iterations to reach four.')
+	# 	max_iter = max(iterations_array)
+	# 	print(f'The number \'{iterations_array.index(max_iter) + 1}\' is longest anything took to reach four with {max_iter} iterations')
 
 
