@@ -45,9 +45,13 @@ if __name__ == "__main__":
 	poss_words = english[lengths == len(word)]
 	for i, poss in enumerate(get_variations(word)):
 		per = int(100*(i+1)/N)
-		print(f'{i}/{N} {poss} ({per}%)')
+		print(f'{i}/{N}: {poss} ({per}%)', end = "\r")
 		if poss in poss_words:
-			print("unscrambled word:")
+			[print("-",end = '') for i in range(len(poss)+2*len(str(N))+10)]
+			print("\nunscrambled word:")
 			print(f'{poss} ({per}% percent computed)')
 			break
 	print(f'saved {len(english)-len(poss_words)} words ({len(poss_words)} comparisons per iteration)')
+#eomselohw
+#someolewh
+#someolehw

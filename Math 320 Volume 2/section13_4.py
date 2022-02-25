@@ -20,17 +20,22 @@ class SimplexSolver(object):
         Raises:
             ValueError: if the given system is infeasible at the origin.
         """
-        if np.min(b) < 0:
-            raise ValueError("problem is not feasible at the origin")
         self.c = c
         self.A = A
         self.b = b
         self.m,self.n = A.shape
-        self.D = self._generatedictionary(c,A,b)
+        if np.min(b) < 0:
+            # need to solve auxiliary problem
+            self.D = self._generate_aux_dict()
+            print(self.D)
+            raise ValueError("problem is not feasible at the origin")
+        else:
+            self.D = self._generatedictionary()
+            print(self.D)
         
 
     # Problem 2
-    def _generatedictionary(self, c, A, b):
+    def _generatedictionary(self):
         """Generate the initial dictionary.
 
         Parameters:
@@ -38,12 +43,25 @@ class SimplexSolver(object):
             A ((m,n) ndarray): The constraint coefficients matrix.
             b ((m,) ndarray): The constraint vector.
         """
-        _A_ = np.hstack((A,np.identity(self.m)))
-        _c_ = np.concatenate((c, np.zeros(self.m)))
+        _A_ = np.hstack((self.A,np.identity(self.m)))
+        _c_ = np.concatenate((self.c, np.zeros(self.m)))
         Dtop = np.hstack(([0], _c_.T))
-        Dbottom = np.hstack((b.reshape(-1,1), -_A_))
+        Dbottom = np.hstack((self.b.reshape(-1,1), -_A_))
         return np.vstack((Dtop, Dbottom))
 
+    def _generate_aux_dict(self):
+        print("A:",self.A.shape)
+        print("b:",self.b.shape)
+        print("c:",self.c.shape)
+        _A_ = np.hstack((self.A, np.identity(self.m), np.ones(self.m).reshape(-1,1)))
+        print("_A_:",_A_.shape)
+        _c_ = np.concatenate((self.c, np.zeros(self.m+1)))
+        print("_c_:",_c_.shape)
+        Dtop = np.hstack(([0], _c_.T))
+        print("Dtop:", Dtop.shape)
+        Dbottom = np.hstack((self.b.reshape(-1,1), -_A_))
+        print("Dbottom:",Dbottom.shape)
+        return np.vstack((Dtop, Dbottom))
 
     # Problem 3a
     def _pivot_col(self):
@@ -204,5 +222,14 @@ def prob25():
     return soln
 
 
+def test00():
+    c = np.array([-3.,-1.])
+    A = np.array([  [1.,3.],
+                    [2.,3.],
+                    [1.,-1.]])
+    b = np.array([15.,18.,-4.])
+    SimplexSolver(c,A,b)
+    
+
 if __name__ == "__main__":
-	print(prob25())
+	print(test00())
