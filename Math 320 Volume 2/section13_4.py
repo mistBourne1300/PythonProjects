@@ -264,6 +264,28 @@ def prob29():
         soln[i-1] = 0
     return soln
 
+def prob38():
+    c = np.array([-2.,1.])
+    A = np.array([  [1.,-2.],
+                    [1.,1.],
+                    [1.,-1.]])
+    b = np.array([1.,3.,1.])
+    min_val, dependent, independent = SimplexSolver(c,A,b).solve(v=True)
+    soln = np.zeros(len(c))
+    max_index = len(c) - 1
+    print('\ndependent:')
+    for i in dependent.keys():
+        print(i)
+        if i-1 > max_index: continue
+        soln[i-1] = dependent[i]
+        print(dependent[i])
+    print("independent:")
+    for i in independent.keys():
+        print(i)
+        if i-1 > max_index: continue
+        soln[i-1] = 0
+    return soln
+
 def test00():
     c = np.array([-3.,-1.])
     A = np.array([  [1.,3.],
@@ -274,4 +296,4 @@ def test00():
     
 
 if __name__ == "__main__":
-	print(prob29())
+	print(prob38())
