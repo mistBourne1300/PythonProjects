@@ -1,10 +1,10 @@
-from readline import read_init_file
-from joblib import PrintTime
-import numpy as np
+# from readline import read_init_file
+# from joblib import PrintTime
+# import numpy as np
 # import re
-# import epitran as ep
-import time
-# import panphon
+# # import epitran as ep
+# import time
+# # import panphon
 
 
 # N = 2000
@@ -21,16 +21,7 @@ import time
 # 	time.sleep(5/N)
 # print(f'\naverage time to print progress bar: {np.mean(print_times)}\n')
 
-import gym
-env = gym.make("Acrobot-v1")
+import epitran
+epi = epitran.Epitran('eng-Latn')
 
-try:
-	env.reset()
-	done = False
-	while not done:
-		env.render()
-		obs, reward, done, info = env.step(env.action_space.sample())
-		if done:
-			break
-finally:
-	env.close()
+print(epi.transliterate("hel.o"))
