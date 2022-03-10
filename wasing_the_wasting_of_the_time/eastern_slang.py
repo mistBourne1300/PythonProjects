@@ -2,7 +2,7 @@ from multiprocessing.sharedctypes import Value
 import sys
 
 if len(sys.argv) < 2:
-	print("\neastern_slang.py needs a string to read:\neastern_slang.py \"sentence\" -file <filename> \n")
+	print("\n\teastern_slang.py needs a string to read:\neastern_slang.py \"sentence\" -file <filename> \n")
 	exit()
 
 # for i,arg in enumerate(sys.argv):
