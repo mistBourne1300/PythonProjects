@@ -21,7 +21,9 @@
 # 	time.sleep(5/N)
 # print(f'\naverage time to print progress bar: {np.mean(print_times)}\n')
 
-import epitran
-epi = epitran.Epitran('eng-Latn')
+import numpy as np
 
-print(epi.transliterate("hel.o"))
+alpha = 'qwertyuiopasdfghjklzxcvbnm1234567890!@#$%^&*()QWERTYUIOP|ASDFGHJKL:"ZXCVBNM<>?-=_+[]\;,./'
+alpha = list(alpha)
+for i in range(100000):
+	print(np.random.choice(alpha), end = "")
