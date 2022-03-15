@@ -21,13 +21,15 @@
 # 	time.sleep(5/N)
 # print(f'\naverage time to print progress bar: {np.mean(print_times)}\n')
 
-# import numpy as np
+import numpy as np
 
 # alpha = 'qwertyuiopasdfghjklzxcvbnm1234567890!@#$%^&*()QWERTYUIOP|ASDFGHJKL:"ZXCVBNM<>?-=_+[]\;,./'
 # alpha = list(alpha)
 # for i in range(100000):
 # 	print(np.random.choice(alpha), end = "")
 
-lzt = ['98595', '32791', '28392', '77323', '92715', '26083', '130094', '99464', '12846', '332', '106064', '31328', '86049', '123900', '74923', '90571', '119538', '139197', '116900', '15672']
-lzt.sort()
-print(lzt)
+# lzt = ['98595', '32791', '28392', '77323', '92715', '26083', '130094', '99464', '12846', '332', '106064', '31328', '86049', '123900', '74923', '90571', '119538', '139197', '116900', '15672']
+# lzt.sort()
+# print(lzt)
+lzt = [0.00745802103822399, 0.0074580210382239895]
+print(np.argsort(lzt))
