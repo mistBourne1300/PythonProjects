@@ -2,7 +2,8 @@
 # from joblib import PrintTime
 # import numpy as np
 # import re
-# # import epitran as ep
+# import epitran
+# epi = epitran.Epitran('eng-Latn')
 # import time
 # # import panphon
 
@@ -31,5 +32,15 @@ import numpy as np
 # lzt = ['98595', '32791', '28392', '77323', '92715', '26083', '130094', '99464', '12846', '332', '106064', '31328', '86049', '123900', '74923', '90571', '119538', '139197', '116900', '15672']
 # lzt.sort()
 # print(lzt)
-lzt = [0.00745802103822399, 0.0074580210382239895]
-print(np.argsort(lzt))
+tree = "ferguson"
+ipa_tree = "epi.transliterate(tree)"
+census = "fergessson"
+ipa_census = "epi.transliterate(census)"
+tree_string = f"tree: {tree}"
+census_string = f"census: {census}"
+ipa_tree_string = f'ipa_tree: {ipa_tree}'
+ipa_census_string = f'ipa_census: {ipa_census}'
+char_count = max(len(tree_string), len(census_string), len(ipa_tree_string), len(ipa_census_string))
+filler = ' '
+print(f'{tree_string:{filler}<{char_count}} {census_string:{filler}<{char_count}}')
+print(f'{ipa_tree_string:{filler}<{char_count}} {ipa_census_string:{filler}<{char_count}}')
