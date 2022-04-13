@@ -38,7 +38,7 @@ def bogobogo(liszt:list, level = 0, v = False):
 		liszt.insert(0,l0)
 		iter += more_iter
 
-		# if the oth element is less than the minimum of the rest of the list,
+		# if the 0th element is less than the minimum of the rest of the list,
 		# the entire list is sorted. return
 		if liszt[0] < np.min(liszt[1:]):
 			if v:
@@ -63,8 +63,6 @@ if __name__ == "__main__":
 		lsd = list(np.arange(i))
 		np.random.shuffle(lsd)
 		print(lsd)
-		# print(lsd[:1])
-		# print(lsd[1:])
 		start = time.time()
 		try:
 			lsd, iter = bogobogo(lsd)
