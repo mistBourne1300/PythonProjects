@@ -55,15 +55,32 @@ def simulacrum(thetas, jackpots, K,T,M, Beta = 0.9):
 	est_probs = [s[0]/(s[0] + s[1]) for s in states]
 	return est_probs, payout_potatoes
 
-def thompson(thetas, jackpots, N, Beta = 0.9):
+def thompson(thetas, N, jackpots = None, Beta = 0.9, animate = False):
+	domain = np.linspace(0,1,500)
 	n = len(thetas)
 	a = np.ones(n)
 	b = np.ones(n)
+	if not jackpots:
+		jackpots = np.ones(n)
+	x_axis = np.zeros(n)
 	X = np.random.random(N)
 	traj = np.zeros(N)
 	for k in range(N):
 		draw = beta.rvs(a,b)
 		index = np.argmax(draw*jackpots)
+		if animate:
+			for i in range(n):
+				# plot beta of arm i
+				dist = beta(a[i],b[i])
+				plt.plot(domain, dist.pdf(domain))
+				# plt.plot(draw[i], dist.pdf(draw[i]), '.')
+			plt.plot(draw, x_axis, '.')
+			plt.title(f'T = {k}/{N} ({100*k/N:.0f}%)')
+			plt.show(block = False)
+			plt.pause(1/N)
+			plt.close()
+		
+		
 		if X[k] <= thetas[index]:
 			a[index] += 1
 			traj[k] = traj[k-1] + (jackpots[index] * (Beta**k))
@@ -116,7 +133,7 @@ def test_thompson_gittins_times():
 		gittins_time.append(time.time() - start)
 
 		start = time.time()
-		t_est_probs = thompson(thetas,jackpots,T)
+		t_est_probs = thompson(thetas,T)
 		thompson_time.append(time.time() - start)
 
 	print(f'thompson avg time: {np.mean(thompson_time)}')
@@ -128,7 +145,7 @@ def test_AB_testing():
 	jackpots = [1,1,1]
 
 	thetas = [.2,.5,.7]
-	print(f'thompson: {thompson(thetas,jackpots, N)[-1]}')
+	print(f'thompson: {thompson(thetas,N)[-1]}')
 
 	print(f'AB_testing: {AB_testing(thetas, jackpots, m, N)}')
 
@@ -138,16 +155,26 @@ def test_beta_discounted():
 	jackpots = [1,1,1]
 	thetas = [.2,.5,.7]
 
-	print(f'thompson: {thompson(thetas, jackpots, N)[-1]}')
+	print(f'thompson: {thompson(thetas,N)[-1]}')
 	print(f'AB_testing: {AB_testing(thetas, jackpots, m,N)}')
 
+def thompson_animation():
+	T = 1000
+	jackpots = [1,1,1,1,1]
 
+	thetas = [.2,.6,.7,.9,.05]
+	start = time.time()
+	thompson(thetas, T, jackpots = jackpots, animate=True)
+	print(f'{T} iters took {time.time() - start:.3f} seconds')
 
 
 if __name__ == "__main__":
-	print("\nThompson time vs Gittins time:")
-	test_thompson_gittins_times()
-	print('\nAB testing vs Thompson payout:')
-	test_AB_testing()
-	print('\nAB testing vs Thompson payout -- discounted:')
-	test_beta_discounted()
+	# print("\nThompson time vs Gittins time:")
+	# test_thompson_gittins_times()
+	# print('\nAB testing vs Thompson payout:')
+	# test_AB_testing()
+	# print('\nAB testing vs Thompson payout -- discounted:')
+	# test_beta_discounted()
+
+	print("\nAnimated Thompson:")
+	thompson_animation()
