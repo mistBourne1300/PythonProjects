@@ -159,10 +159,10 @@ def test_beta_discounted():
 	print(f'AB_testing: {AB_testing(thetas, jackpots, m,N)}')
 
 def thompson_animation():
-	T = 1000
-	jackpots = [1,1,1,1,1]
+	T = 1000 # you get T pulls of the arms
+	jackpots = [1,1,1,1,1] # these are the jackpots (rather boring)
 
-	thetas = [.2,.6,.7,.9,.05]
+	thetas = [.2,.6,.7,.79,.05] # these are the probabilities that each machine has of giving a jackpot...
 	start = time.time()
 	thompson(thetas, T, jackpots = jackpots, animate=True)
 	print(f'{T} iters took {time.time() - start:.3f} seconds')
