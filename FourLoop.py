@@ -1,7 +1,5 @@
 import os
 
-from pyparsing import Word
-from sympy import numer
 
 # print(len('4217643999648948533686334868689238648684936926487387936483792387473874873879277487739827083744470283757473727734087449816356081604710870805773074037775080387883874737473738717537476913846993774830183757488293864783588876433600098765421123455699999999999999995280522225138166806691251291352861698530421623488512'))
 NUMBERS_TO_WORDS = {
@@ -150,9 +148,12 @@ def string_to_num(string:str, v=False):
 		
 
 def get_string(num, p=False, whitespace = ''):
-	#if num == 0:
-		#return 'zero'
+	if num == 0:
+		return 'zero'
 	userNumStr = ""
+	if num < 0:
+		userNumStr = 'negative '
+		num *= -1
 	for NUMBER in NUMBERS_TO_WORDS:
 		if num >= NUMBER:
 			number_of_NUMBERS = num // NUMBER

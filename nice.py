@@ -3,8 +3,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-
-
 def powerset(iter):
 	s = list(iter)
 	returnme = []
@@ -33,7 +31,7 @@ if __name__ == "__main__":
 			counter += 1
 	except KeyboardInterrupt:
 		best = np.argmin(np.abs(np.array(percentages) - np.array([.69 for i in range(len(percentages))])))
-		print(f'the best set is {best} with a percentage of {percentages[best]}. heres the set')
+		print(f'the best set is {best} with a percentage of {100*percentages[best]}%. heres the set')
 		s = [i for i in range(best)]
 		print(s)
 		# print(powerset(s))

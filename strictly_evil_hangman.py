@@ -4,6 +4,7 @@ import os
 from time import time
 
 
+
 if __name__ == "__main__":
 	os.chdir("/Users/chase/Desktop/Python")
 	built_string = ""
@@ -80,12 +81,14 @@ if __name__ == "__main__":
 					built_string = built_string[:i] + input_character + built_string[i+1:]
 	
 	end_time = time()
-	print(built_string, hang_word)
+	print(f'{built_string}:')
+
 	total_time = round(end_time - start_time)
 	if(built_string == hang_word):
 		print(f'it took you {tries} guesses and {total_time} seconds to finish the game')
 	else:
 		print(f'it took you {tries} guesses and {total_time} seconds to give up')
+	
 	
 	
 
