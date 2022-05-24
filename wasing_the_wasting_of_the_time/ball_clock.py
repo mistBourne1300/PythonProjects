@@ -49,7 +49,7 @@ class Ball_Clock:
         self.ones = Rack(4, base = self.base, next = self.fives)
         self.seconds = Rack(59, base = self.base, next = self.ones)
 
-        for i in range(capacity):
+        for i in range(1,capacity+1):
             self.base.add_ball(Ball(i))
     
     def __str__(self):
@@ -78,16 +78,16 @@ class Ball_Clock:
     def order(self):
         order = list()
         for ball in self.base.track:
-            order.append(ball.number * 13)
+            order.append(ball.number * 7)
         
         for ball in self.hours.track:
-            order.append(ball.number * 3600)
+            order.append(ball.number * 5)
         
         for ball in self.fives.track:
-            order.append(ball.number * 300)
+            order.append(ball.number * 3)
 
         for ball in self.ones.track:
-            order.append(ball.number * 60)
+            order.append(ball.number * 2)
         
         for ball in self.seconds.track:
             order.append(ball.number)
@@ -98,12 +98,21 @@ class Ball_Clock:
 if __name__ == "__main__":
     import time
     import os
+    SLEEP_TIME = 1 - 0.00500001633
+    NUM_TICKS = 86400
+
     clock = Ball_Clock()
-    for i in range(60):
+    
+    start = time.time()
+    for i in range(NUM_TICKS):
         os.system("clear")
-        print(clock)
-        time.sleep(1)
+        print(i)
         clock.tick()
+        print(clock)
+        time.sleep((i/NUM_TICKS)**100)
+        
+    
+    print(f"{NUM_TICKS} ticks took {time.time()-start} sec")
 
         
         
