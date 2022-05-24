@@ -99,29 +99,11 @@ if __name__ == "__main__":
     import time
     import os
     clock = Ball_Clock()
-    start_order = clock.order()
-    # for i in range(172001):
-    #     if i%60 == 0:
-    #         os.system("clear")
-    #         print(clock)
-    #         # time.sleep(.1)
-    #     clock.tick()
-    
-    print(clock)
-    clock.tick()
-    counter = 0
-    days = 0
-    while clock.order() != start_order:
-        if counter%86400 == 0:
-            os.system("clear")
-            print("days:", days)
-            print(clock)
-            days += 1
-            counter = 0
+    for i in range(60):
+        os.system("clear")
+        print(clock)
+        time.sleep(1)
         clock.tick()
-        counter += 1
-    
-    print("\n\n")
-    print(clock)
+
         
         
