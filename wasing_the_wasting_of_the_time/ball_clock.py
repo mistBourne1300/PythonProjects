@@ -99,9 +99,9 @@ if __name__ == "__main__":
     import time
     import os
     SLEEP_TIME = 1 - 0.00500001633
-    NUM_TICKS = 86400
+    NUM_TICKS = 25000
 
-    clock = Ball_Clock()
+    clock = Ball_Clock(1000)
     
     start = time.time()
     for i in range(NUM_TICKS):
