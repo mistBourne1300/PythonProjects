@@ -1,6 +1,7 @@
 from random import triangular
 from TTTboard import Board as bd
 from TTTmachine import TicEsMachina
+from TTTMinimax import Minimax
 import numpy as np
 import time
 import matplotlib.pyplot as plt
@@ -149,6 +150,77 @@ def ai_v_ai(tim, tem):
 	elif winner == -1:
 		print("O won")
 
+def minimax():
+	game = bd()
+	player_first = input("Do you want to play as X? [y/n]: ")
+	player = 1
+	winner = 0
+	if player_first == 'y':
+		max = Minimax(-1)
+	else:
+		max = Minimax(1)
+		max.move(game)
+		player *= -1
+		
+	
+	while not game.check_full():
+		print(game)
+		if(player == 1):
+			print("X's turn")
+		else:
+			print("O's turn")
+		
+		row, col = get_user_choice()
+		while not game.make_move(player, row, col):
+			print("invalid option(s) please input an unused row, col pair: ")
+			row, col = get_user_choice()
+		winner = game.check_win()
+		if winner: break
+		player *= -1
+
+		if(player == 1):
+			print("X's turn")
+		else:
+			print("O's turn")
+		
+		max.move(game)
+		winner = game.check_win()
+		if winner: break
+		player *= -1
+
+	print(game)
+	if winner == 0:
+		print("It's a draw!")
+	elif winner == 1:
+		print("X won!")
+	elif winner == -1:
+		print("O won")
+
+def mini_v_max():
+	game = bd()
+	mini = Minimax(-1)
+	max = Minimax(1)
+
+	while not game.check_full():
+		print(game)
+		print("X's turn:")
+		max.move(game)
+		winner = game.check_win()
+		if winner: break
+		print(game)
+		print("O's turn:")
+		mini.move(game)
+		winner = game.check_win()
+		if winner: break
+	print(game)
+	if winner == 0:
+		print("It's a draw!")
+	elif winner == 1:
+		print("X won!")
+	elif winner == -1:
+		print("O won")
+		
+
 def get_winner(tim,tem):
 	game = bd()
 	winner = 0
@@ -216,6 +288,9 @@ if __name__ == "__main__":
 	HUMAN_V_AI = 1
 	AI_V_AI = 2
 	TRAIN_AI = 3
+	MINIMAX = 4
+	MINI_VS_MAX = 5
+
 	POP_NUM = 100
 	GEN_NUM = 1000
 
@@ -223,9 +298,12 @@ if __name__ == "__main__":
 	print("Human v human: 0")
 	print("Human v AI: 1")
 	print("AI v AI: 2")
-	print("Train AI (this will clear the current best AI): 3")
+	print("Train AI (this will clear the current best AI): 3\n")
+	print("Human vs Minimax: 4")
+	print("Minimax vs Minimax: 5")
+
 	choice = -1
-	while choice < 0 or choice > 3:
+	while choice < 0 or choice > 5:
 		choice = int(input("Pick an option: "))
 	
 	if choice == HUMAN_V_HUMAN:
@@ -324,7 +402,10 @@ if __name__ == "__main__":
 		plt.plot(regress[1] + regress[0]*gens)
 		plt.savefig(f'Training_Times_Figs/{POP_NUM}for{GEN_NUM}.png')
 		plt.show()
-
+	elif choice == MINIMAX:
+		minimax()
+	elif choice == MINI_VS_MAX:
+		mini_v_max()
 
 
 		

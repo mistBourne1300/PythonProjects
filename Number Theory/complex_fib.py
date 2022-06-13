@@ -9,7 +9,7 @@ gold = (1+np.sqrt(5))/2
 
 binet = lambda n: (gold**n - (1-gold)**n)/np.sqrt(5)
 
-lower = -5
+lower = -0
 upper = 5
 
 domain = np.linspace(lower, upper, 1000)

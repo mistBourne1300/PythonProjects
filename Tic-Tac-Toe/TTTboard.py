@@ -10,6 +10,12 @@ class Board:
 	def __init__(self):
 		self.board = np.array([[0 for j in range(3)] for i in range(3)])
 	
+	def poss_moves(self):
+		for row in range(3):
+			for col in range(3):
+				if self.board[row,col] == 0:
+					yield row, col
+	
 	def check_full(self):
 		'''	
 			check if the board is in a full state
@@ -19,6 +25,16 @@ class Board:
 		'''
 		if np.all(self.board != 0):
 			return True
+		
+	def empty_squares(self):
+		'''
+			return the number of empty squares on the board
+		'''
+		empty = 0
+		for i in np.ravel(self.board):
+			if i == 0:
+				empty += 1
+		return empty
 	
 	def check_win(self):
 		'''
