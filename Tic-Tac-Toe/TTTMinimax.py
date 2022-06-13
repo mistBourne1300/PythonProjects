@@ -18,7 +18,6 @@ class Minimax:
 		self.player = player
 		self.row = 0
 		self.col = 0
-		self.count = 0
 		
 		self.starting_moves = {"UP LEFT" : (0,0), "UP RIGHT" : (0,2), "LOW RIGHT" : (2,2), "LOW LEFT" : (2,0)}
 	
@@ -26,10 +25,6 @@ class Minimax:
 		return board.check_win() * self.player * (board.empty_squares() + 1)
 	
 	def move_recur(self, board:bd, player, level = 0):
-		# temp = input("press enter to continue recursion")
-		print(f"level: {level}, count: {self.count}")
-		self.count += 1
-		
 		if board.check_win() or board.check_full():
 			return self.utility(board)
 
@@ -64,12 +59,10 @@ class Minimax:
 
 	def move(self, board:bd):
 		print("Calculating next move...")
-		# temp = input(f"{board.empty_squares()} press enter to continue")
 		if board.empty_squares() == 9:
 			row, col = self.starting_moves[np.random.choice(list(self.starting_moves.keys()))]
 			board.make_move(self.player, row, col)
 			return
-		self.count = 0
 		util = self.move_recur(board, self.player)
 		print(f"making move at {self.row}, {self.col} with utility {util}")
 		board.make_move(self.player, self.row, self.col)
