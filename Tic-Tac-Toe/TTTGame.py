@@ -177,6 +177,7 @@ def minimax():
 		winner = game.check_win()
 		if winner: break
 		player *= -1
+		print(game)
 
 		if(player == 1):
 			print("X's turn")
