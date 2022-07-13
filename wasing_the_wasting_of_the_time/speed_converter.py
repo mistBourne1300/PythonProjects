@@ -48,7 +48,11 @@ TIMES = {	"YEAR":1,
 
 
 if __name__ == "__main__":
-
+	for i,k in enumerate(list(LIGHTYEARS.keys())):
+		print(f"{i}: {k}")
+	distance = int(input("select distance to measure: "))
+	distance = LIGHTYEARS[list(LIGHTYEARS.keys())[distance]]
+	print(f"your distance is {distance}")
 
 	speed = int(input("enter the numerical speed: "))
 
