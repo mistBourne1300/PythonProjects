@@ -54,7 +54,7 @@ if __name__ == "__main__":
 	distance = LIGHTYEARS[list(LIGHTYEARS.keys())[distance]]
 	print(f"your distance is {distance}")
 
-	speed = int(input("enter the numerical speed: "))
+	speed = float(input("enter the numerical speed: "))
 
 	for i,k in enumerate(list(LENGTHS.keys())):
 		print(f"{i}: {k}")
@@ -76,8 +76,8 @@ if __name__ == "__main__":
 	print(f'length conversion factor: {length_convert}')
 	print(f'time conversion factor: {time_convert}')
 
-	tot_time = LIGHTYEARS_TO_ALPHA_CENTAURI * length_convert * (1/speed) * (1/time_convert)
+	tot_time = distance * length_convert * (1/speed) * (1/time_convert)
 	print(f'the total time to alpha centauri is {tot_time:.3f} years')
 	tot_time = np.round(tot_time,3)
 	print(f"that's {FourLoop.get_string_float(tot_time)}years!")
-	os.system(f'say "it will take {FourLoop.get_string_float(tot_time)}years"')
+	# os.system(f'say "it will take {FourLoop.get_string_float(tot_time)}years"')
