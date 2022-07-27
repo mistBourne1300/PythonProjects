@@ -80,4 +80,4 @@ if __name__ == "__main__":
 	print(f'the total time to alpha centauri is {tot_time:.3f} years')
 	tot_time = np.round(tot_time,3)
 	print(f"that's {FourLoop.get_string_float(tot_time)}years!")
-	# os.system(f'say "it will take {FourLoop.get_string_float(tot_time)}years"')
+	os.system(f'say "it will take {FourLoop.get_string_float(tot_time)}years"')
